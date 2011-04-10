@@ -27,7 +27,7 @@ _version__ = '0.3'
 __author__ = 'Benjamin Mako Hill <mako@atdot.cc>'
 __author__ = 'seanh <snhmnd@gmail.com>'
 
-FILENAME_EXTENSIONS = ('.txt','.text','.mkdn','.markdown','.md','.mdown','.markdn','.mkd')
+FILENAME_EXTENSIONS = ('.mdwn', '.txt','.text','.mkdn','.markdown','.md','.mdown','.markdn','.mkd')
 
 import markdown
 import os
@@ -37,6 +37,6 @@ md = markdown.Markdown(output_format='html4',extensions=['extra',])
 def cb_story(args):
 	entry = args['entry']
 	if os.path.splitext(entry['filename'])[1] in FILENAME_EXTENSIONS:
-		entry['body'] = md.convert(''.join(entry['body']))
+		entry['body'] = md.convert(u''.join(entry['body'].decode("utf-8")))
 		md.reset()
 	return args
